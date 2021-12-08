@@ -39,9 +39,9 @@ class CameraCaptureSessionStateCallback(val activity: MainActivity, val params: 
             params.captureSession = cameraCaptureSession
             params.captureSessionCallback = CaptureSessionCallback(activity, params)
 
-            params.recaptureImageWriter = ImageWriter.newInstance(params.captureSession?.inputSurface, 1)
+            params.recaptureImageWriter = ImageWriter.newInstance(params.captureSession?.inputSurface!!, 1)
 
-            params.captureSession?.setRepeatingRequest(params.previewBuilder?.build(),
+            params.captureSession?.setRepeatingRequest(params.previewBuilder?.build()!!,
                 params.captureSessionCallback, params.backgroundHandler)
 
         } catch (e: CameraAccessException) {

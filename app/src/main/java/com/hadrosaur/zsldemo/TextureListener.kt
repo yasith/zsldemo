@@ -23,7 +23,7 @@ import com.hadrosaur.zsldemo.CameraController.closeCamera
 import com.hadrosaur.zsldemo.MainActivity.Companion.Logd
 
 class TextureListener(internal val activity: MainActivity, internal var params: CameraParams, internal val textureView: AutoFitTextureView): TextureView.SurfaceTextureListener {
-    override fun onSurfaceTextureUpdated(p0: SurfaceTexture?) {
+    override fun onSurfaceTextureUpdated(p0: SurfaceTexture) {
 //        Logd( "In surfaceTextureUpdated. Id: " + params.id)
 //        openCamera(params, activity)
     }

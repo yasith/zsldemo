@@ -43,7 +43,7 @@ fun camera2OpenCamera(activity: MainActivity, params: CameraParams) {
 
     try {
         params.cameraDeviceStateCallback = CameraDeviceStateCallback(activity, params)
-        manager.openCamera(params.id, params.cameraDeviceStateCallback, params.backgroundHandler)
+        manager.openCamera(params.id, params.cameraDeviceStateCallback!!, params.backgroundHandler)
 
     } catch (e: CameraAccessException) {
         Logd("openCamera CameraAccessException: " + params.id)
@@ -110,10 +110,10 @@ fun recaptureRequest(activity: MainActivity, params: CameraParams, zslPair: ZSLP
 
     val jpegImageReaderSurface = params.jpegImageReader?.surface
     params.recaptureBuilder = params.device?.createReprocessCaptureRequest(zslPair.result)
-    params.recaptureBuilder?.addTarget(jpegImageReaderSurface)
+    params.recaptureBuilder?.addTarget(jpegImageReaderSurface!!)
 
     params.recaptureImageWriter?.queueInputImage(zslPair.image)
-    params.captureSession?.capture(params.recaptureBuilder?.build(), RecaptureRequestCallback(activity, params), params.backgroundHandler)
+    params.captureSession?.capture(params.recaptureBuilder?.build()!!, RecaptureRequestCallback(activity, params), params.backgroundHandler)
 
 }
 

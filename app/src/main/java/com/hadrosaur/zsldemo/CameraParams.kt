@@ -29,7 +29,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.hadrosaur.zsldemo.CameraController.CameraDeviceStateCallback
 import com.hadrosaur.zsldemo.CameraController.CaptureSessionCallback
 import com.hadrosaur.zsldemo.MainActivity.Companion.Logd
-import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
 class CameraParams {
@@ -92,13 +91,13 @@ fun setupCameraParams(activity: MainActivity, params: CameraParams) {
         }
         characteristics = manager.getCameraCharacteristics(id)
 
-        previewTextureView = activity.texture_foreground
-        previewTextureView?.surfaceTextureListener = TextureListener(activity, params, activity.texture_foreground)
+        previewTextureView = activity.binding.textureForeground
+        previewTextureView?.surfaceTextureListener = TextureListener(activity, params, activity.binding.textureForeground)
 
         captureImageAvailableListener = CaptureImageAvailableListener(activity, params)
         saveImageAvailableListener = SaveImageAvailableListener(activity, params)
 
-        val cameraCapabilities = manager.getCameraCharacteristics(id).get(CameraCharacteristics.REQUEST_AVAILABLE_CAPABILITIES)
+        val cameraCapabilities = manager.getCameraCharacteristics(id).get(CameraCharacteristics.REQUEST_AVAILABLE_CAPABILITIES)!!
         for (capability in cameraCapabilities) {
             when (capability) {
                 CameraCharacteristics.REQUEST_AVAILABLE_CAPABILITIES_PRIVATE_REPROCESSING -> canReprocess = true

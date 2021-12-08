@@ -18,8 +18,6 @@ package com.hadrosaur.zsldemo
 
 import android.Manifest
 import android.content.pm.PackageManager
-import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.HandlerThread
@@ -27,18 +25,20 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import android.view.WindowManager
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProviders
 import com.hadrosaur.zsldemo.CameraController.camera2OpenCamera
 import com.hadrosaur.zsldemo.CameraController.closeCamera
-import kotlinx.android.synthetic.main.activity_main.*
+import com.hadrosaur.zsldemo.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
     private val REQUEST_CAMERA_PERMISSION = 1
     private val REQUEST_FILE_WRITE_PERMISSION = 2
+
+    lateinit var binding: ActivityMainBinding
 
     companion object {
         private val LOG_TAG = "ZSLDemo"
@@ -53,13 +53,14 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_main)
         camViewModel = ViewModelProviders.of(this).get(CamViewModel::class.java)
 
         if (checkCameraPermissions()) {
             setupCameraParams(this, camViewModel.getCameraParams())
 
-            button_capture.setOnClickListener {
+            binding.buttonCapture.setOnClickListener {
                 camViewModel.getZSLCoordinator().capturePhoto(this, camViewModel.getCameraParams())
             }
         }

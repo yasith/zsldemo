@@ -28,7 +28,7 @@ class CameraDeviceStateCallback(internal val activity: MainActivity, internal va
         createCameraCaptureSession(activity, cameraDevice, params)
     }
 
-    override fun onClosed(camera: CameraDevice?) {
+    override fun onClosed(camera: CameraDevice) {
         MainActivity.Logd("In CameraStateCallback onClosed. Camera is closed.")
         super.onClosed(camera)
     }
